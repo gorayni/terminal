@@ -103,6 +103,24 @@ it will always generate an output like:
 54
 ```
 
+## Files transfer
+
+Copy long file over flaky connection [[original]](https://superuser.com/questions/302842/resume-rsync-over-ssh-after-broken-connection)
+
+```Shell
+while [ 1 ]
+do
+    rsync -avz --partial source dest
+    if [ "$?" = "0" ] ; then
+        echo "rsync completed normally"
+        exit
+    else
+        echo "Rsync failure. Backing off and retrying..."
+        sleep 10
+    fi
+done
+```
+
 ## GIT
 
 Using meld to see all modifications in the working directory [[original]](https://www.programming-books.io/essential/git/using-meld-to-see-all-modifications-in-the-working-directory-bb8d0be146054d40a352d1795333e858)
@@ -115,6 +133,41 @@ Show the differences between 2 specific commits [[original]](https://www.program
 
 ```Shell
 git difftool -t meld --dir-diff  [COMMIT_A] [COMMIT_B]
+```
+## PDF
+
+### Compress images inside pdfs:
+
+[[original]](https://unix.stackexchange.com/questions/274428/how-do-i-reduce-the-size-of-a-pdf-file-that-contains-images)
+
+```Shell
+gs -sDEVICE=pdfwrite -dPDFSETTINGS=/default -q -o output.pdf input.pdf
+```
+
+## Images
+
+### Crop images:
+
+[[original]](https://imagemagick.org/script/command-line-options.php#crop)
+
+```Shell
+convert input.png -crop WIDTHxHEIGHT+StartX+StartY output.png
+```
+
+### Images compression:
+
+JPG
+
+```Shell
+convert input.jpg -compress jpeg -quality 35 -density 300x300 output.jpg
+```
+
+PNG 
+
+Color quantization [[original]](https://github.com/kornelski/pngquant)
+
+```Shell
+pngquant --force --ext .png --quality=62-100 input.png
 ```
 
 ## Tools
