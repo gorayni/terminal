@@ -1,5 +1,105 @@
 # Terminal cheatsheet
 
+## Conda commands
+
+### List manually installed packages
+
+```Shell
+conda env export --from-history
+```
+
+### List revisions of installed packages in an environment 
+
+```Shell
+conda list --revisions
+```
+
+### Revert to a previous revision 
+
+```Shell
+conda install --revision N
+```
+
+NOTE: conda install --rev 0 will remove your root environment and the conda command itself
+
+## Files transfer
+
+Copy long file over flaky connection [[original]](https://superuser.com/questions/302842/resume-rsync-over-ssh-after-broken-connection)
+
+```Shell
+while [ 1 ]
+do
+    rsync -avz --partial source dest
+    if [ "$?" = "0" ] ; then
+        echo "rsync completed normally"
+        exit
+    else
+        echo "Rsync failure. Backing off and retrying..."
+        sleep 10
+    fi
+done
+```
+
+## GIT
+
+Using meld to see all modifications in the working directory [[original]](https://www.programming-books.io/essential/git/using-meld-to-see-all-modifications-in-the-working-directory-bb8d0be146054d40a352d1795333e858)
+
+```Shell
+git difftool -t meld --dir-diff
+```
+
+Show the differences between 2 specific commits [[original]](https://www.programming-books.io/essential/git/using-meld-to-see-all-modifications-in-the-working-directory-bb8d0be146054d40a352d1795333e858):
+
+```Shell
+git difftool -t meld --dir-diff  [COMMIT_A] [COMMIT_B]
+```
+## PDF
+
+### PDF to SVG:
+
+```Shell
+pdf2svg
+```
+
+### Compress images inside pdfs:
+
+[[original]](https://unix.stackexchange.com/questions/274428/how-do-i-reduce-the-size-of-a-pdf-file-that-contains-images)
+
+```Shell
+gs -sDEVICE=pdfwrite -dPDFSETTINGS=/default -q -o output.pdf input.pdf
+```
+
+## Images
+
+### Crop images:
+
+[[original]](https://imagemagick.org/script/command-line-options.php#crop)
+
+```Shell
+convert input.png -crop WIDTHxHEIGHT+StartX+StartY output.png
+```
+
+### Images compression:
+
+JPG
+
+```Shell
+convert input.jpg -compress jpeg -quality 35 -density 300x300 output.jpg
+```
+
+PNG 
+
+Color quantization [[original]](https://github.com/kornelski/pngquant)
+
+```Shell
+pngquant --force --ext .png --quality=62-100 input.png
+```
+
+## Tools
+
+* [grip](https://github.com/joeyespo/grip): Render local Markdown readme files before sending off to GitHub.
+* [Meld](https://meldmerge.org/): visual diff and merge tool. 
+
 ## Rows and Columns
 
 ### One text column to multiple columns:
@@ -34,6 +134,19 @@ will generate an output like:
 1 2 3
 4 5 6
 7 8 9
+```
+# Hard Disk Recovery commands
+
+## List USB connected devices:
+
+```Shell
+lsusb -t -v
+```
+
+## Show logical volumes of the Hard Drives.
+
+```Shell
+lshw -class disk
 ```
 
 ### Sampling the rows from a file
@@ -102,75 +215,3 @@ it will always generate an output like:
 127
 54
 ```
-
-## Files transfer
-
-Copy long file over flaky connection [[original]](https://superuser.com/questions/302842/resume-rsync-over-ssh-after-broken-connection)
-
-```Shell
-while [ 1 ]
-do
-    rsync -avz --partial source dest
-    if [ "$?" = "0" ] ; then
-        echo "rsync completed normally"
-        exit
-    else
-        echo "Rsync failure. Backing off and retrying..."
-        sleep 10
-    fi
-done
-```
-
-## GIT
-
-Using meld to see all modifications in the working directory [[original]](https://www.programming-books.io/essential/git/using-meld-to-see-all-modifications-in-the-working-directory-bb8d0be146054d40a352d1795333e858)
-
-```Shell
-git difftool -t meld --dir-diff
-```
-
-Show the differences between 2 specific commits [[original]](https://www.programming-books.io/essential/git/using-meld-to-see-all-modifications-in-the-working-directory-bb8d0be146054d40a352d1795333e858):
-
-```Shell
-git difftool -t meld --dir-diff  [COMMIT_A] [COMMIT_B]
-```
-## PDF
-
-### Compress images inside pdfs:
-
-[[original]](https://unix.stackexchange.com/questions/274428/how-do-i-reduce-the-size-of-a-pdf-file-that-contains-images)
-
-```Shell
-gs -sDEVICE=pdfwrite -dPDFSETTINGS=/default -q -o output.pdf input.pdf
-```
-
-## Images
-
-### Crop images:
-
-[[original]](https://imagemagick.org/script/command-line-options.php#crop)
-
-```Shell
-convert input.png -crop WIDTHxHEIGHT+StartX+StartY output.png
-```
-
-### Images compression:
-
-JPG
-
-```Shell
-convert input.jpg -compress jpeg -quality 35 -density 300x300 output.jpg
-```
-
-PNG 
-
-Color quantization [[original]](https://github.com/kornelski/pngquant)
-
-```Shell
-pngquant --force --ext .png --quality=62-100 input.png
-```
-
-## Tools
-
-* [grip](https://github.com/joeyespo/grip): Render local Markdown readme files before sending off to GitHub.
-* [Meld](https://meldmerge.org/): visual diff and merge tool. 
