@@ -53,6 +53,17 @@ Show the differences between 2 specific commits [[original]](https://www.program
 ```Shell
 git difftool -t meld --dir-diff  [COMMIT_A] [COMMIT_B]
 ```
+
+### Add changes to previous commit
+
+```Shell
+git add modified.file
+
+git commit --amend --no-edit
+
+git push -f origin some_branch
+```
+
 ## PDF
 
 ### PDF to SVG:
@@ -77,6 +88,11 @@ gs -sDEVICE=pdfwrite -dPDFSETTINGS=/default -q -o output.pdf input.pdf
 
 ```Shell
 convert input.png -crop WIDTHxHEIGHT+StartX+StartY output.png
+```
+### Check for corruption:
+
+```Shell
+jpeginfo -c input.jpg
 ```
 
 ### Images compression:
