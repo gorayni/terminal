@@ -151,21 +151,29 @@ will generate an output like:
 4 5 6
 7 8 9
 ```
-# Hard Disk Recovery commands
+## Hard Disk Recovery commands
 
-## List USB connected devices:
+### List USB connected devices:
 
 ```Shell
 lsusb -t -v
 ```
 
-## Show logical volumes of the Hard Drives.
+### Show logical volumes of the Hard Drives.
 
 ```Shell
 lshw -class disk
 ```
 
-### Sampling the rows from a file
+## Logs
+
+### Check system log from previous *n* sessions
+
+```Shell
+journalctl -b -n
+```
+
+## Sampling the rows from a file
 
 Creating a one column file with 200 numbers:
 
