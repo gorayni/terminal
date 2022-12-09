@@ -64,6 +64,67 @@ git commit --amend --no-edit
 git push -f origin some_branch
 ```
 
+## SSH Keys
+
+### External computer configuration
+
+1. **Make SSH-KEYS**. if you already have an SSH key, you can skip this step. Just hit Enter for the key and both passphrases:
+
+```Shell
+localhost$ ssh-keygen -t rsa -b 2048
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/username/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/username/.ssh/id_rsa.
+Your public key has been saved in /home/username/.ssh/id_rsa.pub
+```
+
+2. **Add ~/.ssh/config**. Add the following configuration to the ~/.ssh/config file. Please make sure to replace with your correct info
+
+```
+Host SERVER_ALIAS
+    HostName SERVERs_IP_or_URL
+    Port 22
+    User YOUR_USERNAME_AT_SERVER
+```
+
+3. **Copy your keys to the server**. It will ask your password on the server
+
+```shell
+localhost$ ssh-copy-id SERVER_ALIAS
+```
+
+Now, you can connect without asking your password like this
+
+```shell
+localhost$ ssh SERVER_ALIAS
+```
+
+Or copy files like this
+
+```shell
+localhost$ scp file.ext SERVER_ALIAS:~/some_dir
+```
+
+### SSH Tunneling
+
+The remote IP could belong to any computer in the remote network
+
+```shell
+ssh -nNT -L local_port:remote_ip:remote_port user@remotehost
+```
+
+## Videos
+
+### Concatenate a set of videos:
+
+```shell
+cat videos.ts > all.ts
+ffmpeg -i all.ts -acodec copy -vcodec copy all.mp4
+```
+
 ## PDF
 
 ### PDF to SVG:
