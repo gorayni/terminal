@@ -64,9 +64,11 @@ git commit --amend --no-edit
 git push -f origin some_branch
 ```
 
-## SSH Keys
+## SSH
 
-### External computer configuration
+### SSH Keys
+
+#### External computer configuration
 
 1. **Make SSH-KEYS**. if you already have an SSH key, you can skip this step. Just hit Enter for the key and both passphrases:
 
@@ -115,6 +117,16 @@ The remote IP could belong to any computer in the remote network
 ```shell
 ssh -nNT -L local_port:remote_ip:remote_port user@remotehost
 ```
+
+### SOCKS Proxy [[original]](https://gist.github.com/brentjanderson/6ed800376e53746d2d28ba7b6bdcdc12)
+
+Start the SOCKS proxy connection using ssh.
+
+```shell
+ssh -ND 9999 user@remotehost
+```
+
+In Firefox' SOCKS settings, select *Manual proxy configuration*, type `localhost` for the SOCKS host andd 9999 for the port.
 
 ## Videos
 
