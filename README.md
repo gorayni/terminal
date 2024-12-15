@@ -153,6 +153,12 @@ pdf2svg
 gs -sDEVICE=pdfwrite -dPDFSETTINGS=/default -q -o output.pdf input.pdf
 ```
 
+### Extract bitmap images from a PDF file:
+
+```Shell
+pdfimages -j yourfile.pdf output_prefix
+```
+
 ## Images
 
 ### Crop images:
