@@ -190,6 +190,12 @@ Color quantization [[original]](https://github.com/kornelski/pngquant)
 pngquant --force --ext .png --quality=62-100 input.png
 ```
 
+SVG 
+
+```Shell
+scour -i input.svg -o output.svg
+```
+
 ## Tools
 
 * [grip](https://github.com/joeyespo/grip): Render local Markdown readme files before sending off to GitHub.
